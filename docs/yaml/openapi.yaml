@@ -1,0 +1,74 @@
+openapi: 3.0.0
+info:
+ version: 1.0.0
+ title: Back End Demonstration API
+ description: A simple blog API.
+ contact:
+  name: Your name
+  email: 237049000@stu.vtc.edu.hk
+ license:
+  name: Apache 2.0
+  url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+  
+servers:
+  - url: 'https://b3455d48-a821-4acb-a424-42d7ecf3976b-00-171rxnnonh4gt.pike.repl.co/api/v1/ '
+    description: Development server
+    
+tags:
+  - name: User
+    description: API endpoints for user management
+  - name: Articles
+    description: Access and perform CRUD operations for blog
+    
+paths:
+  /articles/{id}:
+    paramaters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+      description: Numeric id of the article
+    get:
+      tags:
+        - Articles
+      description: article by id
+      responses:
+        '200':
+          description: View of an article record
+        '404':
+          description: Article not found
+    put:
+      tags:
+        - Articles
+      description: article by id
+      responses:
+        '201':
+          description: Update Successfully
+        '404':
+          description: Article not found
+    delete: 
+      tags:
+        - Articles
+      description: delete article by id
+      responses:
+        '201':
+          description: Delete Successfully
+        '404':
+          description: Article not found
+  /articles:
+      post:
+        tags:
+          - Articles
+      description: create a new article
+      requestBody:
+        description: Article to Json format
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './article.json#/definitions/article'
+
+        responses:
+         '201':
+         description: Articles created
