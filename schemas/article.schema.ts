@@ -1,4 +1,4 @@
-export const article = {
+export const article = { //check 條件
   "$schema": "http://json-schema.org/draft-07/schema#",
   "id": "/article",
   "title": "Article",

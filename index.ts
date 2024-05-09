@@ -3,10 +3,17 @@ import Router, { RouterContext } from "koa-router";
 import logger from "koa-logger";
 import json from "koa-json";
 import bodyParser from "koa-bodyparser";
-import { router as articles} from "./routes/articles";
-import { router as special} from "./routes/special";
+import { router as articles } from "./routes/articles";
+//import { router as users} from "./routes/users";
+//import { router as dogs} from "./routes/dogs";
+import { router as special } from "./routes/special";
 import passport from "koa-passport";
 import serve from 'koa-static';
+import cors from '@koa/cors';
+
+
+
+
 // import { CustomErrorMessageFunction, query, body, validationResults } from "koa-req-validation";
 
 const app: Koa = new Koa();
@@ -65,7 +72,7 @@ app.use(serve('./docs'));
 //   await next();
 // });
 
-
+app.use(cors());
 app.use(json());
 app.use(logger());
 app.use(bodyParser());
@@ -74,6 +81,7 @@ app.use(router.routes());
 app.use(special.middleware());
 app.use(articles.middleware());
 app.use(passport.initialize());
+// app.use(special.routes());
 //app.use(router.routes()).use(router.allowedMethods());
 app.use(async (ctx: RouterContext, next: any) => {
   try {
@@ -86,6 +94,8 @@ app.use(async (ctx: RouterContext, next: any) => {
     ctx.body = { err: err }
   }
 })
+
+
 
 app.listen(10888, () => {
   console.log("Koa Started");

@@ -12,7 +12,7 @@ const verifyPassword = (user: any, password: string) => {
 passport.use(new BasicStrategy(async (username, password, done) => {
   let result: any[] = [];
   try {
-    result = await user.findByUsername(username);
+    result = await user.findByUsername (username);
   } catch(error) {
     console.error(`Error during authentication for user ${username} ${error}`);
     done(null, false);
